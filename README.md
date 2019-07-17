@@ -1,2 +1,2 @@
-# sellams
+# sellam
  E-commerce platform
