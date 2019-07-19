@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:sellam/routes/home/widgets/drawer.dart';
+import 'package:sellam/routes/home/widgets/product_tile.dart';
+import 'package:sellam/models/product.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -12,13 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +34,9 @@ class _HomePageState extends State<HomePage> {
               actions: <Widget>[IconButton(icon: Icon(Icons.search, color: Color(0xFFff6f00), size: 30), onPressed: () {},)],
             ),
             drawer: AppDrawer(),
+            body: ListView(
+              children: getProductsTiles(),
+            ),
           ),
         ),
         Container(
@@ -47,4 +46,10 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
+}
+
+List<ProductTile> getProductsTiles() {
+  return PRODUCTS.map((product) {
+    return ProductTile(product);
+  }).toList();
 }

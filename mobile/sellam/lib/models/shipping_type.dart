@@ -1,0 +1,4 @@
+enum ShippingType{
+  BUS,
+  CHECKPOINTS
+}
