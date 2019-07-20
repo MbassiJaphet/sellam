@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:sellam/models/product_category.dart';
 
 class Product{
@@ -7,7 +8,7 @@ class Product{
   final ProductCategory category;
   final double price;
   final double quantity;
-  final Image picture;
+  final Widget picture;
   final String publicationDate;
   final String description;
 
@@ -35,7 +36,7 @@ var PRODUCTS = [
   ),
   Product(
     id: 3,
-    name: 'Chicken with Spaghetti',
+    name: 'Chicken & Spaghetti',
     category: ProductCategory(id:3, name: 'Food', description: ''),
     price: 2849,
     quantity: 4,
