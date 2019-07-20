@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:sellam/main.dart';
 import 'package:sellam/models/user.dart';
+import 'package:sellam/routes/description/description.dart';
 import 'package:sellam/routes/home/home.dart';
 import 'package:sellam/routes/favorites/favorite_products.dart';
+import 'package:sellam/routes/signin/signin.dart';
+import 'package:sellam/routes/signup/signup.dart';
 import 'package:sellam/routes/notifications/notifications.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
@@ -63,10 +66,28 @@ class SellamAppSession extends InheritedWidget {
         builder: (BuildContext context) => SellamAppSession(child: FavoriteProducts(), user: user),
         fullscreenDialog: true,
       );
+    }else if (settings.name == '/description') {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => SellamAppSession(child: DescriptionPage(), user: user),
+        fullscreenDialog: true,
+      );
     }else if (settings.name == '/notifications') {
       return MaterialPageRoute<void>(
         settings: settings,
         builder: (BuildContext context) => SellamAppSession(child: NotificationsPage(), user: user),
+        fullscreenDialog: true,
+      );
+    }else if (settings.name == '/signin') {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => SellamAppSession(child: SignInPage(), user: user),
+        fullscreenDialog: true,
+      );
+    }else if (settings.name == '/signup') {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => SellamAppSession(child: SignUpPage(), user: user),
         fullscreenDialog: true,
       );
     }else{
