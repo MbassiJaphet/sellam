@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:sellam/models/product.dart';
 import 'package:sellam/routes/home/widgets/drawer.dart';
 import 'package:sellam/routes/home/widgets/product_tile.dart';
-import 'package:sellam/models/product.dart';
-
+import 'package:sellam/routes/home/widgets/products_listview_header.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({Key key}) : super(key: key);
 
-  final String title;
+  final String title = 'Sellam';
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -20,23 +20,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Theme(
-          data: ThemeData(
-            appBarTheme: AppBarTheme(
-              color: Colors.white
-            )
+        Scaffold(
+          backgroundColor: Color(0xFFf5f5f5),
+          appBar: AppBar(
+            title: Text(widget.title, style: TextStyle(color: Color(0xFFff6f00), fontSize: 26, fontWeight: FontWeight.bold)),
+            centerTitle: true,
+            actions: <Widget>[
+              IconButton(icon: Icon(Icons.search), onPressed: () {},),
+              IconButton(icon: Icon(Icons.refresh), onPressed: () {},)
+            ],
           ),
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(widget.title, style: TextStyle(color: Color(0xFFff6f00), fontSize: 26, fontWeight: FontWeight.bold)),
-              centerTitle: true,
-              leading: IconButton(icon: Icon(Icons.menu, color: Color(0xFFff6f00), size: 36), onPressed: () {/*Scaffold.of(context).openDrawer();*/},),
-              actions: <Widget>[IconButton(icon: Icon(Icons.search, color: Color(0xFFff6f00), size: 30), onPressed: () {},)],
-            ),
-            drawer: AppDrawer(),
-            body: ListView(
-              children: getProductsTiles(),
-            ),
+          drawer: AppDrawer(),
+          body: ListView(
+            padding: EdgeInsets.all(8),
+            children: getProductsTiles(),
           ),
         ),
         Container(
@@ -48,8 +45,12 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-List<ProductTile> getProductsTiles() {
-  return PRODUCTS.map((product) {
-    return ProductTile(product);
-  }).toList();
+List<Widget> getProductsTiles() {
+  List<Widget> widgets = [ProductsListViewHeader()];
+  for(int i = 0; i <= 2; i++){
+    widgets.addAll(PRODUCTS.map((product) {
+      return ProductTile(key: UniqueKey(), product: product);
+    }).toList());
+  }
+  return widgets;
 }
