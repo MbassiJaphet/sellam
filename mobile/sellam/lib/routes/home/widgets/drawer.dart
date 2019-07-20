@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
+import 'package:sellam/app.dart';
+
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class AppDrawer extends StatelessWidget {
                 ),
                 margin: EdgeInsets.all(8),
                 child: ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8),
                   leading: Icon(OMIcons.home),
                   title: Text('Home', style: TextStyle(color: Color(0xFFff8f00) ,fontWeight: FontWeight.w600)),
                   onTap: () {Navigator.pop(context);},
@@ -41,7 +44,7 @@ class AppDrawer extends StatelessWidget {
                 child: Text('My space'),
               ),
               ListTile(
-                leading: Icon(OMIcons.localShipping),
+                leading: Icon(OMIcons.redeem),
                 title: Text('Orders', style: TextStyle(color: Color(0xFF616161) ,fontWeight: FontWeight.w600)),
                 onTap: () {},
               ),
@@ -56,9 +59,14 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {Navigator.popAndPushNamed(context, '/notifications');},
               ),
               Divider(),
+              (SellamAppSession.of(context).userLoggedIn) ?
               ListTile(
-                title: Text('Sign out', style: TextStyle(color: Color(0xFF757575) ,fontWeight: FontWeight.w600)),
-                onTap: () {},
+                title: Text('Sign out', style: TextStyle(color: Color(0xFF9e9e9e) ,fontWeight: FontWeight.w600)),
+                onTap: () {Navigator.pop(context);SellamAppSession.of(context).userLoggedIn = false;},
+              ) :
+              ListTile(
+                title: Text('Sign in', style: TextStyle(color: Color(0xFFff6f00) ,fontWeight: FontWeight.w600)),
+                onTap: () {Navigator.pop(context);SellamAppSession.of(context).userLoggedIn = true;},
               ),
             ],
           ),

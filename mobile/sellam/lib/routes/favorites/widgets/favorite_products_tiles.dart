@@ -82,10 +82,12 @@ class _FavoriteProductTileState extends State<FavoriteProductTile> {
   void removeFromFavorites(BuildContext context){
     if(! SellamAppSession.of(context).user.favorites.map((product) {return product.id;}).toList().contains(widget.product.id)){
       setState(() {
+        SellamAppSession.of(context).user.favorites.add(widget.product);
         favoriteIcon =  Icon(Icons.favorite, color: Colors.red);
       });
     }else{
       setState(() {
+        SellamAppSession.of(context).user.favorites.remove(widget.product);
         favoriteIcon =  Icon(Icons.favorite_border, color: Color(0xFF616161));
       });
     }

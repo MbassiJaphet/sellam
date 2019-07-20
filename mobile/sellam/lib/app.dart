@@ -7,6 +7,7 @@ import 'package:sellam/routes/favorites/favorite_products.dart';
 import 'package:sellam/routes/notifications/notifications.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
 class SellamApp extends StatelessWidget {
   // This widget is the root of the application.
   @override
