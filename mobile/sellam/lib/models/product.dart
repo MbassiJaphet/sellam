@@ -27,7 +27,7 @@ var PRODUCTS = [
   ),
   Product(
     id: 2,
-    name: 'Wafer',
+    name: 'Wafers',
     category: ProductCategory(id: 0, name: 'Food', description: ''),
     price: 599,
     quantity: 200,
