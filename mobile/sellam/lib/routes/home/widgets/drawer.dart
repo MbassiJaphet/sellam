@@ -66,7 +66,10 @@ class AppDrawer extends StatelessWidget {
               ) :
               ListTile(
                 title: Text('Sign in', style: TextStyle(color: Color(0xFFff6f00) ,fontWeight: FontWeight.w600)),
-                onTap: () {Navigator.pop(context);SellamAppSession.of(context).userLoggedIn = true;},
+                onTap: () {
+                  Navigator.pushNamed(context, '/signin');
+                  SellamAppSession.of(context).userLoggedIn = true;
+                },
               ),
             ],
           ),

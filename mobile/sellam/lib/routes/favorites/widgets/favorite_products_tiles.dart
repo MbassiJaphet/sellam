@@ -27,7 +27,7 @@ class _FavoriteProductTileState extends State<FavoriteProductTile> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {Navigator.pushNamed(context, '/description', arguments: widget.product);},
       child: Card(
         elevation: 0,
         color: Colors.white70,
@@ -42,7 +42,7 @@ class _FavoriteProductTileState extends State<FavoriteProductTile> {
                 color: Color(0xFFeeeeee),
                 borderRadius: BorderRadius.all(Radius.circular(6)),
               ),
-              child: this.widget.product.picture
+              child: Image.asset(this.widget.product.picture),
             ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
