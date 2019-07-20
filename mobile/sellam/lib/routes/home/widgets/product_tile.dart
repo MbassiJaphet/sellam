@@ -85,13 +85,11 @@ class _ProductTileState extends State<ProductTile> {
     if( ! SellamAppSession.of(context).user.favorites.map((product) {return product.id;}).toList().contains(widget.product.id)){
       setState(() {
        SellamAppSession.of(context).user.favorites.add(widget.product);
-       print('red');
        favoriteIcon =  Icon(Icons.favorite, color: Colors.red);
       });
     }else{
       setState(() {
        SellamAppSession.of(context).user.favorites.remove(widget.product);
-       print('white');
        favoriteIcon =  Icon(Icons.favorite_border, color: Color(0xFF616161));
       });
     }

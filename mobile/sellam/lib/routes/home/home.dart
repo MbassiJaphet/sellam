@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:sellam/app.dart';
 import 'package:sellam/models/product.dart';
 import 'package:sellam/routes/home/widgets/drawer.dart';
 import 'package:sellam/routes/home/widgets/product_tile.dart';
@@ -14,7 +15,33 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with RouteAware {
+
+  List<Widget> PRODCUCTS_TILES;
+
+  @override
+  void initState() {
+    super.initState();
+    this.PRODCUCTS_TILES = getProductsTiles();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context));
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+  @override
+  void didPopNext() {
+    setState(() {
+      this.PRODCUCTS_TILES = getProductsTiles();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           drawer: AppDrawer(),
           body: ListView(
             padding: EdgeInsets.all(8),
-            children: getProductsTiles(),
+            children: this.PRODCUCTS_TILES,
           ),
         ),
         Container(
