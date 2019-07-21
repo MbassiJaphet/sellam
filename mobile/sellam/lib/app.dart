@@ -8,6 +8,8 @@ import 'package:sellam/routes/favorites/favorite_products.dart';
 import 'package:sellam/routes/signin/signin.dart';
 import 'package:sellam/routes/signup/signup.dart';
 import 'package:sellam/routes/notifications/notifications.dart';
+import 'package:sellam/routes/purchase/purchase.dart';
+import 'package:sellam/routes/sell/sell.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
@@ -70,6 +72,18 @@ class SellamAppSession extends InheritedWidget {
       return MaterialPageRoute<void>(
         settings: settings,
         builder: (BuildContext context) => SellamAppSession(child: DescriptionPage(), user: user),
+        fullscreenDialog: true,
+      );
+    }else if (settings.name == '/purchase') {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => SellamAppSession(child: PurchasePage(), user: user),
+        fullscreenDialog: true,
+      );
+    }else if (settings.name == '/sell') {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => SellamAppSession(child: SellPage(), user: user),
         fullscreenDialog: true,
       );
     }else if (settings.name == '/notifications') {

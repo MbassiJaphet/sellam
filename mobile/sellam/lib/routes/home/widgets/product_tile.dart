@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:sellam/app.dart';
 import 'package:sellam/models/product.dart';
 
+
 class ProductTile extends StatefulWidget {
   final Product product;
   final Key key;

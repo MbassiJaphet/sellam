@@ -26,8 +26,18 @@ class _SignUpPageState extends State<SignUpPage> {
             width: double.infinity,
             height: double.infinity,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 80.0),
+          
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 0.0),
+              child: Center(
+                child: Form(
+
+                    child: ListView(
+                      children: <Widget>[
+
+                        Padding(
+            padding: const EdgeInsets.only(top: 60.0),
             child: Container(
                 alignment: Alignment.topCenter,
                 child: new CircleAvatar(
@@ -38,17 +48,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
             ),
           ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 120.0),
-              child: Center(
-                child: Form(
-
-                    child: ListView(
-                      children: <Widget>[
 
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
+                          padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
                           child: Container(
                               alignment: Alignment.topCenter,
                               child: Text("Sign Up",
@@ -165,7 +167,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.deepOrange.shade700,
+                              color: Color(0xFFff6f00),
                               elevation: 0.0,
                               child: MaterialButton(
                                 onPressed: () { Navigator.pop(context);  },

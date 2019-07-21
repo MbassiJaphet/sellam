@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:sellam/app.dart';
 import 'package:sellam/models/product.dart';
 
 class DescriptionPage extends StatefulWidget {
+  final Product product;
+    final Key key;
+
+  DescriptionPage({this.key, this.product}) : super(key: key);
 
   @override
   _DescriptionPageState createState() => _DescriptionPageState();
@@ -9,14 +15,24 @@ class DescriptionPage extends StatefulWidget {
 }
 
 class _DescriptionPageState extends State<DescriptionPage> {
+
+ _DescriptionPageState();
+
+  int dropdownValue = 1;
+  Widget favoriteIcon;
   @override
+
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     final Product product = ModalRoute.of(context).settings.arguments;
     return new Scaffold(
       appBar: new AppBar(
-        leading:new IconButton(icon: Icon(Icons.arrow_back), onPressed: (){Navigator.pop(context);}),
+        leading:new IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){Navigator.pop(context);}),
         elevation: 0.1,
-        title: Text(product.name,  style: TextStyle(color: Color(0xFFff6f00), fontSize: 26, fontWeight: FontWeight.bold)),
+        title: Text(product.name,  style: TextStyle(color: Color(0xFFff6f00), fontSize: 22, fontWeight: FontWeight.bold)),
         centerTitle: true,
        /*actions: <Widget>[
           new IconButton(icon: Icon(Icons.search), onPressed: (){}),
@@ -25,11 +41,12 @@ class _DescriptionPageState extends State<DescriptionPage> {
       ),
 
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
         child: new ListView(
           children: <Widget>[
             new Container(
-              height: 300.0,
+              height: 180.0,
+              
               child: GridTile(
                   child: new Container(
                     color: Colors.white,
@@ -38,7 +55,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
                 footer: new Container(
                   color: Colors.white70,
                   child: ListTile(
-                    leading: new Text(product.name, style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
+                    leading: new Text("Product Price :", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
                     title: new Row(
                       children: <Widget>[
                         /*
@@ -60,106 +77,46 @@ class _DescriptionPageState extends State<DescriptionPage> {
 
             // ======= first button ========
 
-            new Row(
-              children: <Widget>[
+            Container(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                  child: new Row(
+                  children: <Widget>[
 
-                // ======= size button =======
+                    // ======= size button =======
 
-                new Expanded(child: MaterialButton(
-                    onPressed: (){
-                      showDialog(context: context,
-                      builder: (context){
-                        return new AlertDialog(
-                           title: new Text("Cart updated"),
-                           content: new Text("Book added to cart"),
-                           actions: <Widget>[
-                             new MaterialButton(onPressed: (){
-                               Navigator.of(context).pop(context);
-                             },
-                             child: new Text("Close"))
-                           ],
-                        );
-                      },
-                      );
-                    },
-                   color: Colors.white,
-                  textColor: Colors.grey,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: new Text("Size")
-                      ),
-
-                      Expanded(
-                        child: new Icon(Icons.arrow_drop_down)
-                      )
-                    ],
-                  )
-                )),
-                new Expanded(child: MaterialButton(
-                    onPressed: (){
-                      showDialog(context: context,
-                        builder: (context){
-                          return new AlertDialog(
-                            title: new Text("Color"),
-                            content: new Text("Choose the color"),
-                            actions: <Widget>[
-                              new MaterialButton(onPressed: (){
-                                Navigator.of(context).pop(context);
-                              },
-                                  child: new Text("Close"))
-                            ],
-                          );
-                        },
-                      );
-
-                },
-                    color: Colors.white,
-                    textColor: Colors.grey,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: new Text("Color")
-                        ),
-
-                        Expanded(
-                            child: new Icon(Icons.arrow_drop_down)
+                    new Expanded(child: Container(
+                      child: Text("Choose quantity within available:", style: TextStyle(fontSize: 14.0, color: Colors.grey)),
+                        )),
+                    
+                    Padding(
+                     padding: const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                     child: DropdownButton<int>(
+                       elevation: 0,
+                       iconEnabledColor: Color(0xFFff6f00),
+                       iconDisabledColor: Color(0xFFff6f00),
+                      value: dropdownValue,
+                      onChanged: (int newValue) {
+                         setState(() {
+                             dropdownValue = newValue;
+                            });
+                       },
+                       items: <int>[1, 2, 3, 4, 5]
+                       .map<DropdownMenuItem<int>>((int value) {
+                        return DropdownMenuItem<int>(
+                        value: value,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left:10.0, right: 10.0),
+                          child: Text("$value", style: TextStyle(color: Color(0xFFff6f00), fontWeight: FontWeight.bold),),
                         )
-                      ],
-                    )
-                )),
-                new Expanded(child: MaterialButton(
-                    onPressed: (){
-                      showDialog(context: context,
-                        builder: (context){
-                          return new AlertDialog(
-                            title: new Text("Quantity"),
-                            content: new Text("Choose the quantity"),
-                            actions: <Widget>[
-                              new MaterialButton(onPressed: (){
-                                Navigator.of(context).pop(context);
-                              },
-                                  child: new Text("Close"))
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    color: Colors.white,
-                    textColor: Colors.grey,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: new Text("Qty")
-                        ),
-
-                        Expanded(
-                            child: new Icon(Icons.arrow_drop_down)
-                        )
-                      ],
-                    )
-                ))
-              ],
+                  );
+                  })
+                  .toList(),
+                  ),
+                   ),
+                  ],
+              ),
+                ),
             ),
 
             // =========== Second button ============
@@ -171,17 +128,17 @@ class _DescriptionPageState extends State<DescriptionPage> {
 
                 new Expanded(
                     child: MaterialButton(
-                        onPressed: (){},
-                        color: Colors.deepOrange,
+                        onPressed: (){Navigator.pushNamed(context, '/purchase', arguments: widget.product);},
+                        color: Color(0xFFff6f00),
                         textColor: Colors.white,
                         elevation: 0.2,
                     child: new Text("Buy now")
                 )
                 ),
+               
 
-                new IconButton(icon: Icon(Icons.add_shopping_cart), color: Colors.deepOrange, onPressed: (){}),
-                new IconButton(icon: Icon(Icons.favorite_border), color: Colors.deepOrange, onPressed: (){}),
-
+  
+              
               ],
             ),
 
@@ -244,4 +201,6 @@ class _DescriptionPageState extends State<DescriptionPage> {
 
     );
   }
+
+
 }
