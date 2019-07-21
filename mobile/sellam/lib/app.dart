@@ -4,6 +4,8 @@ import 'package:sellam/main.dart';
 import 'package:sellam/models/user.dart';
 import 'package:sellam/routes/description/description.dart';
 import 'package:sellam/routes/home/home.dart';
+import 'package:sellam/routes/profile/profile.dart';
+import 'package:sellam/routes/orders/orders.dart';
 import 'package:sellam/routes/favorites/favorite_products.dart';
 import 'package:sellam/routes/signin/signin.dart';
 import 'package:sellam/routes/signup/signup.dart';
@@ -45,10 +47,11 @@ class SellamAppSession extends InheritedWidget {
   bool userLoggedIn;
   final bool isFirstUse;
 
-  SellamAppSession ({this.user, this.isFirstUse = false, this.userLoggedIn = false, this.child,}) : super(child : child);
+  SellamAppSession ({this.user, this.isFirstUse = false, this.userLoggedIn = true, this.child,}) : super(child : child);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
+  // bool updateShouldNotify(InheritedWidget oldWidget){ print('Noftified') ; return true;}
 
   static SellamAppSession of(BuildContext context) => 
     context.inheritFromWidgetOfExactType(SellamAppSession);
@@ -58,6 +61,18 @@ class SellamAppSession extends InheritedWidget {
       return MaterialPageRoute<void>(
         settings: settings,
         builder: (BuildContext context) => SellamAppSession(child: HomePage(), user:user),
+        fullscreenDialog: true,
+      );
+    }if (settings.name == ProfilePage.route) {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => SellamAppSession(child: ProfilePage(), user:user),
+        fullscreenDialog: true,
+      );
+    }if (settings.name == OrdersPage.route) {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => SellamAppSession(child: OrdersPage(), user:user),
         fullscreenDialog: true,
       );
     }else if (settings.name == '/favorites') {

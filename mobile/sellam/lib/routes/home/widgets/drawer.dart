@@ -36,7 +36,7 @@ class AppDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(OMIcons.addBox),
                 title: Text('Place an ad', style: TextStyle(color: Color(0xFF616161) ,fontWeight: FontWeight.w600)),
-                onTap: () {},
+                onTap: () {Navigator.popAndPushNamed(context, '/sell');},
               ),
               Divider(),
               Padding(
