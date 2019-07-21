@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sellam - Home</title>
+</head>
+<body>
+<h1>SELLAM</h1>
+<h3>Latest products</h3>
+{% for product in products %}
+    <img src="http://127.0.0.1:8000/media/{{product.image}}" height="200" width="200" />
+    <h5>{{product.product_name}}</h5>
+    <span>{{product.price}}</span>
+    <a href="/details/{{product.pk}}" style="display: block;">View details</a>
+{% endfor %}
+</body>
+</html>
