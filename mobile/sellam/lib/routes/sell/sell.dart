@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class SellPage extends StatelessWidget {
 
-  final String title = 'Place AD';
+  final String title = 'Place an AD';
   static final String route = '/sell';
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class SellPage extends StatelessWidget {
           appBar: AppBar(
             elevation: 1,
             leading: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){Navigator.pop(context);}),
-            title: Text('New Product', style: TextStyle(color: Color(0xFFff6f00), fontWeight: FontWeight.bold),),
+            title: Text(this.title, style: TextStyle(color: Color(0xFFff6f00), fontWeight: FontWeight.bold),),
             centerTitle: true,
           ),
 
