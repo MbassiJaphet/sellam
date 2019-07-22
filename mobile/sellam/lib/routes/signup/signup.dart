@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:sellam/app.dart';
+
 class SignUpPage extends StatefulWidget {
+
+  final String title = 'Sign Up';
+  static final String route = '/signup';
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -170,7 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               color: Color(0xFFff6f00),
                               elevation: 0.0,
                               child: MaterialButton(
-                                onPressed: () { Navigator.pop(context);  },
+                                onPressed: () {Navigator.pop(context);SellamAppSession.of(context).signIn(context);},
                                 minWidth: MediaQuery.of(context).size.width,
                                 child: Text(
                                   "Register",

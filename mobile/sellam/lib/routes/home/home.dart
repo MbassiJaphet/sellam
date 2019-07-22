@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:sellam/app.dart';
 import 'package:sellam/models/product.dart';
-import 'package:sellam/routes/home/widgets/drawer.dart';
+import 'package:sellam/widgets/drawer.dart';
 import 'package:sellam/routes/home/widgets/product_tile.dart';
 import 'package:sellam/routes/home/widgets/products_listview_header.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
 
-  final String title = 'Sellam';
+  final String title = 'Home';
+  static final String route = '/home';
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -44,6 +45,13 @@ class _HomePageState extends State<HomePage> with RouteAware {
   }
 
   @override
+  void didPop() {
+    setState(() {
+      this.PRODCUCTS_TILES = getProductsTiles();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
@@ -54,10 +62,10 @@ class _HomePageState extends State<HomePage> with RouteAware {
             centerTitle: true,
             actions: <Widget>[
               IconButton(icon: Icon(Icons.search), onPressed: () {},),
-              IconButton(icon: Icon(Icons.refresh), onPressed: () {},)
+              IconButton(icon: Icon(Icons.refresh), onPressed: () {didPopNext();},)
             ],
           ),
-          drawer: AppDrawer(),
+          drawer: AppDrawer(HomePage.route, AppDrawer.builder(context)),
           body: ListView(
             padding: EdgeInsets.all(8),
             children: this.PRODCUCTS_TILES,

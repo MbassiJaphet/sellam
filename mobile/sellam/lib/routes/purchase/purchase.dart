@@ -3,10 +3,9 @@ import 'package:flutter/rendering.dart';
 import 'package:sellam/models/product.dart';
 
 class PurchasePage extends StatefulWidget {
-final Product product;
- final Key key;
 
-  PurchasePage({this.key, this.product}) : super(key: key);
+  final String title = 'Purchase';
+  static final String route = '/purchase';
 
   @override
   _PurchasePageState createState() => _PurchasePageState();
@@ -39,7 +38,6 @@ class _PurchasePageState extends State<PurchasePage> {
 
   Widget build(BuildContext context) {
     final Product product = ModalRoute.of(context).settings.arguments;
-    //print(product.name);
     final _kTabPages = <Widget>[
       Delivery(),
       MTN(),
@@ -49,7 +47,7 @@ class _PurchasePageState extends State<PurchasePage> {
       BottomNavigationBarItem(icon: Icon(Icons.phonelink_ring), title: Text('Mobile Money')),
     ];
     assert(_kTabPages.length == _kBottomNavBarItems.length);
-    final bottomNavBar = new Theme(
+    final bottomNavBar = Theme(
       data: Theme.of(context).copyWith(
         primaryColor: Colors.purple,
 
@@ -73,16 +71,24 @@ class _PurchasePageState extends State<PurchasePage> {
       ),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leading: IconButton(onPressed: (){ Navigator.pop(context); }, icon: Icon(Icons.arrow_back_ios,),),
-        elevation: 1.3,
-        title: Text('Purchase Order', style: TextStyle(color: Color(0xFFff6f00), fontWeight: FontWeight.bold)),
+    return Stack(
+      children: <Widget>[
+        Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            leading: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){Navigator.pop(context);}),
+            elevation: 1.3,
+            title: Text('Purchase Order', style: TextStyle(color: Color(0xFFff6f00), fontWeight: FontWeight.bold)),
 
-      ),
-      body: _kTabPages[_currentTabIndex],
-      bottomNavigationBar: Stack(children: <Widget>[bottomNavBar]),
+          ),
+          body: _kTabPages[_currentTabIndex],
+          bottomNavigationBar: Stack(children: <Widget>[bottomNavBar]),
+        ),
+        Container(
+          height: MediaQuery.of(context).padding.top,
+          color: Color(0xFFff6f00),
+        )
+      ],
     );
   }
 }
@@ -90,7 +96,7 @@ class _PurchasePageState extends State<PurchasePage> {
 class Delivery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Center(
+    return Center(
       child: Padding(
         padding: const EdgeInsets.all(0.0),
         child: Center(
@@ -162,14 +168,14 @@ class Delivery extends StatelessWidget {
                           onPressed: () {
                             showDialog(context: context,
                               builder: (context){
-                                return new AlertDialog(
-                                  title: new Text("Success"),
-                                  content: new Text("Order succesfully initiated, \n Go to Home page"),
+                                return AlertDialog(
+                                  title: Text("Success"),
+                                  content: Text("Order succesfully initiated, \n Go to Home page"),
                                   actions: <Widget>[
-                                    new MaterialButton(onPressed: (){
+                                    MaterialButton(onPressed: (){
                                       Navigator.pushNamed(context, '/home');
                                     },
-                                        child: new Text("Ok"))
+                                        child: Text("Ok"))
                                   ],
                                 );
                               },
@@ -197,7 +203,7 @@ class Delivery extends StatelessWidget {
 class MTN extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Center(
+    return Center(
       child: Padding(
         padding: const EdgeInsets.all(0.0),
         child: Center(
@@ -310,6 +316,6 @@ class MTN extends StatelessWidget {
 
 
 
-final imgDelivery = 'assets/deliv.png';
-final imgMTN = 'assets/mtn.jpg';
+final imgDelivery = 'assets/deliv.jpg';
+final imgMTN = 'assets/momo.jpg';
 final imgVisa = 'images/visa1.png';

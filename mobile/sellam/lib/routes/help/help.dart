@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:sellam/routes/notifications/widgets/notifications_helpers.dart';
+import 'package:sellam/app.dart';
+import 'package:sellam/models/models.dart';
 
-class NotificationsPage extends StatefulWidget {
+class HelpPage extends StatefulWidget {
 
-  final String title = 'Notifications';
-  static final String route = '/notifications';
+  final String title = 'Help';
+  static final String route = '/help';
   @override
-  _NotificationsPageState createState() => _NotificationsPageState();
+  _HelpPageState createState() => _HelpPageState();
 }
 
-class _NotificationsPageState extends State<NotificationsPage> {
+class _HelpPageState extends State<HelpPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -30,10 +31,6 @@ class _NotificationsPageState extends State<NotificationsPage> {
               centerTitle: true,
               title: Text(widget.title, style: TextStyle(color: Color(0xFFff6f00), fontSize: 26, fontWeight: FontWeight.bold)),
               leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: Color(0xFFff6f00)), onPressed: (){Navigator.pop(context);}),
-            ),
-            body: ListView(
-              padding: EdgeInsets.all(8),
-              children: <Widget>[NoNotificationsPlaceHolder()],
             ),
           ),
         ),

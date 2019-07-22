@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:sellam/app.dart';
-import 'package:sellam/models/product.dart';
+import 'package:sellam/routes/routes.dart';
+import 'package:sellam/models/models.dart';
 
 class FavoriteProductTile extends StatefulWidget {
   final Product product;
@@ -27,7 +28,7 @@ class _FavoriteProductTileState extends State<FavoriteProductTile> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {Navigator.pushNamed(context, '/description', arguments: widget.product);},
+      onTap: () {Navigator.pushNamed(context, DescriptionPage.route, arguments: widget.product);},
       child: Card(
         elevation: 0,
         color: Colors.white70,

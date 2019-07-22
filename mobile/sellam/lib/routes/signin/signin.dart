@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:sellam/app.dart';
+import 'package:sellam/routes/routes.dart';
+
 class SignInPage extends StatefulWidget {
 
+  final String title = 'Sign in';
+  static final String route = '/signin';
   @override
   _SignInPageState createState() => _SignInPageState();
 
@@ -115,10 +120,10 @@ class _SignInPageState extends State<SignInPage> {
                         color: Colors.deepOrange,
                         elevation: 0.0,
                         child: MaterialButton(
-                          onPressed: () { Navigator.pop(context); },
+                          onPressed: () {SellamAppSession.of(context).signIn(context);Navigator.pop(context);},
                           minWidth: MediaQuery.of(context).size.width,
                           child: Text(
-                            "Login",
+                            "Sign In",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
@@ -142,8 +147,8 @@ class _SignInPageState extends State<SignInPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
-                        onTap: (){ Navigator.popAndPushNamed(context, '/signup'); },
-                        child: Text("Sign up", textAlign: TextAlign.center, style: TextStyle(color: Colors.deepOrange),))
+                        onTap: (){ Navigator.popAndPushNamed(context, SignUpPage.route); },
+                        child: Text('Sign Up', textAlign: TextAlign.center, style: TextStyle(color: Colors.deepOrange),))
                     ),
                   ],
                 )

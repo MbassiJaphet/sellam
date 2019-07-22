@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:sellam/app.dart';
+import 'package:sellam/routes/routes.dart';
 import 'package:sellam/models/product.dart';
 
 
@@ -30,7 +31,7 @@ class _ProductTileState extends State<ProductTile> {
   Widget build(BuildContext context) {
     initFavoriteIcon(context);
     return InkWell(
-      onTap: () {Navigator.pushNamed(context, '/description', arguments: widget.product);},
+      onTap: () {Navigator.pushNamed(context, DescriptionPage.route, arguments: widget.product);},
       child: Card(
         elevation: 0,
         color: Colors.white70,
@@ -75,7 +76,7 @@ class _ProductTileState extends State<ProductTile> {
                 ),
               ),
               Spacer(),
-              IconButton(icon: favoriteIcon, onPressed: () {manageFavorite(context);}),
+              (SellamAppSession.of(context).userLoggedIn) ? IconButton(icon: favoriteIcon, onPressed: () {manageFavorite(context);}) : SizedBox(),
           ],
         ),
       ),
@@ -83,16 +84,18 @@ class _ProductTileState extends State<ProductTile> {
   }
 
   void manageFavorite(BuildContext context){
-    if( ! SellamAppSession.of(context).user.favorites.map((product) {return product.id;}).toList().contains(widget.product.id)){
-      setState(() {
-       SellamAppSession.of(context).user.favorites.add(widget.product);
-       favoriteIcon =  Icon(Icons.favorite, color: Colors.red);
-      });
-    }else{
-      setState(() {
-       SellamAppSession.of(context).user.favorites.remove(widget.product);
-       favoriteIcon =  Icon(Icons.favorite_border, color: Color(0xFF616161));
-      });
+    if(SellamAppSession.of(context).userLoggedIn){
+      if( ! SellamAppSession.of(context).user.favorites.map((product) {return product.id;}).toList().contains(widget.product.id)){
+        setState(() {
+        SellamAppSession.of(context).user.favorites.add(widget.product);
+        favoriteIcon =  Icon(Icons.favorite, color: Colors.red);
+        });
+      }else{
+        setState(() {
+        SellamAppSession.of(context).user.favorites.remove(widget.product);
+        favoriteIcon =  Icon(Icons.favorite_border, color: Color(0xFF616161));
+        });
+      }
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sellam/routes/home/widgets/carousel.dart';
 
 String _mostAncients = 'Filter: Most Ancients';
 String _mostRecents = 'Filter: Most Recents';
@@ -14,6 +15,7 @@ class ProductsListViewHeader extends StatefulWidget {
 class _ProductsListViewHeaderState extends State<ProductsListViewHeader> {
   @override
   Widget build(BuildContext context) {
+    return AppCarousel();
     return Container(
       color: Colors.white70,
       child: Column(
